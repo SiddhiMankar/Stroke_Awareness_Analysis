@@ -7,7 +7,7 @@ import os
 # -----------------------------
 # LOAD DATASET
 # -----------------------------
-file_path = "merged_dataset.csv"  # update path if needed
+file_path = "cleaned_data_unique.csv"  # update path if needed
 if not os.path.exists(file_path):
     raise FileNotFoundError(f"{file_path} not found. Place the CSV in this folder or update the path.")
 
@@ -36,21 +36,21 @@ if numeric_cols:
     print(df[numeric_cols].describe())
 
     # Plot histograms separately
-    #for col in numeric_cols:
-        #plt.figure(figsize=(6, 4))
-        #plt.hist(df[col].dropna(), bins=20, color='skyblue', edgecolor='black')
-        #plt.title(f"Distribution of {col}")
-        #plt.xlabel(col)
-        #plt.ylabel("Frequency")
-        #plt.tight_layout()
-        #plt.show()
+    for col in numeric_cols:
+        plt.figure(figsize=(6, 4))
+        plt.hist(df[col].dropna(), bins=20, color='skyblue', edgecolor='black')
+        plt.title(f"Distribution of {col}")
+        plt.xlabel(col)
+        plt.ylabel("Frequency")
+        plt.tight_layout()
+        plt.show()
 
     # Correlation matrix
     corr = df[numeric_cols].corr()
-    #plt.figure(figsize=(12, 10))
+    plt.figure(figsize=(12, 10))
     sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm")
-    #plt.title("Correlation Matrix")
-    #plt.show()
+    plt.title("Correlation Matrix")
+    plt.show()
 
 # -----------------------------
 # CATEGORICAL / BINARY COLUMNS ANALYSIS
@@ -67,7 +67,7 @@ for col in cat_cols + binary_cols:
     plt.title(f"Distribution of {col}")
     plt.xticks(rotation=45)
     plt.tight_layout()
-    #plt.show()
+    plt.show()
 
 # -----------------------------
 # MISSING VALUE VISUALIZATION
@@ -75,7 +75,7 @@ for col in cat_cols + binary_cols:
 plt.figure(figsize=(12, 6))
 sns.heatmap(df.isnull(), cbar=False)
 plt.title("Missing Values Heatmap")
-#plt.show()
+plt.show()
 
 # -----------------------------
 # PAIRPLOTS / RELATIONSHIPS
@@ -83,7 +83,7 @@ plt.title("Missing Values Heatmap")
 if len(numeric_cols) <= 10:
     sns.pairplot(df[numeric_cols])
     plt.suptitle("Pairplot of Numeric Columns", y=1.02)
-    #plt.show()
+    plt.show()
 
 # -----------------------------
 # SUMMARY REPORT
