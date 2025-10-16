@@ -133,8 +133,7 @@ rename_map = {
 df.rename(columns={old: new for old, new in rename_map.items() if old in df.columns}, inplace=True)
 
 # === Step 4: Save cleaned dataset with new column names ===
-timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-output_path = f"C:/Users/S.D.M/stroke_ml_project/standardized_columns_{timestamp}.csv"
+output_path = f"C:/Users/S.D.M/stroke_ml_project/standardized_columns.csv"
 df.to_csv(output_path, index=False, encoding='utf-8')
 
 print("\n✅ Column names standardized and saved!")
